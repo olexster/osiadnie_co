@@ -1,0 +1,56 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+```{r}
+xy<-data.frame(x=c(110,50,160),y=c(100,150,160))
+print(xy)
+```
+jak policzyc przyblizony srodek okregu z trzech punktów
+```{r}
+sr_okr<-function(xy){
+  xy<-as.matrix(xy)
+  a<-cbind(xy*2,1) #-2ax-2bY+c
+  A<-t(a)%*%a
+  B<-t(a)%*%rowSums(xy^2) #-2ax-2bY+c=x^2+y^2
+  # covA<-cov(A)^0.5 #macierz comawiancji mx[i]=(cov(A)[i,i])^0.5
+  X<-solve(A,B)
+  print(X)
+  #   print(A)
+  #   cat('\n')
+  print(cov(A)^0.5)
+  return(X[1:2])
+}
+print(sr_okr(xy))
+```
+funkcja wybirtajaca 3 elementy z wektora od 1 do 10 bez powtorzen
+```{r}
+sample(1:10,3,replace = F)
+
+```
+równaina macierzowe
+4x-2y+z=-4
+8x- y+z=-2
+ x+3y-z=6
+```{r}
+a<-matrix(data =c(4,8,1,-2,-1,3,1,1,-1),nrow = 3)
+b<-matrix(data = c(-4,-2,6))
+print(a)
+print(b)
+solve(a,b)
+```
+ 
