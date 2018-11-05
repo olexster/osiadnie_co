@@ -53,4 +53,13 @@ print(a)
 print(b)
 solve(a,b)
 ```
+
+wydzielanie przedzialów danych 
+
+```{r}
+x<-c(1:3,10:15)
+print(x)
+cut(x,2,labels = c("a","b"))
+
+```
  
