@@ -9,6 +9,6 @@ sr_okr<-function(xy){
   print(x)
   #   print(A)
   #   cat('\n')
-  print(cov(A)^0.5)
-  return(X[1:2])
+  # print(cov(A)^0.5)
+  return(x[1:2])
 }
