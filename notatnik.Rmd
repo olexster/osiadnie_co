@@ -22,20 +22,24 @@ print(xy)
 ```
 jak policzyc przyblizony srodek okregu z trzech punktów
 ```{r}
-sr_okr<-function(xy){
-  xy<-as.matrix(xy)
-  a<-cbind(xy*2,1) #-2ax-2bY+c
-  A<-t(a)%*%a
-  B<-t(a)%*%rowSums(xy^2) #-2ax-2bY+c=x^2+y^2
+  xy<-as.matrix(s1[which(s1$poziom=="d"),-c(1,4,5)])
+# oblicznie przyblizonego srodka 
+  xy3<-(xy[sample(1:nrow(xy),3,replace = F),])
+  a<-cbind(xy3*2,1) #-2ax-2bY+c
+  b<-rowSums(xy3^2)
+  x<-solve(a,b)
+  print(x)
+  apll
+  # a<-cbind(xy*2,1) #-2ax-2bY+c
+  # A<-t(a)%*%a
+  # B<-t(a)%*%rowSums(xy^2) #-2ax-2bY+c=x^2+y^2
   # covA<-cov(A)^0.5 #macierz comawiancji mx[i]=(cov(A)[i,i])^0.5
-  X<-solve(A,B)
-  print(X)
+  # X<-solve(A,B)
+  # print(X)
   #   print(A)
   #   cat('\n')
-  print(cov(A)^0.5)
-  return(X[1:2])
-}
-print(sr_okr(xy))
+  # print(cov(A)^0.5)
+  # return(X[1:2])
 ```
 funkcja wybirtajaca 3 elementy z wektora od 1 do 10 bez powtorzen
 ```{r}

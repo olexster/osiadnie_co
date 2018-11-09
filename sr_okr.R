@@ -1,5 +1,11 @@
 sr_okr<-function(xy){
   xy<-as.matrix(xy)
+# oblicznie przyblizonego srodka 
+  xy3<-xy[sample(1:nrow(s1),3,replace = F),-c(1,4)]
+  a<-cbind(xy3*2,1) #-2ax-2bY+c
+  b<-rowSums(xy^2)
+  x<-solve(a,b)
+  
   a<-cbind(xy*2,1) #-2ax-2bY+c
   A<-t(a)%*%a
   B<-t(a)%*%rowSums(xy^2) #-2ax-2bY+c=x^2+y^2

@@ -5,3 +5,4 @@ col.names = c("Nr:","X","Y","H")
 )
 
 s1$poziom<-cut(s1$V4,2,labels = c("d","g"))
+sr_okr()
