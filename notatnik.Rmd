@@ -43,7 +43,7 @@ jak policzyc przyblizony srodek okregu z trzech punktów
   
   # return(X[1:2]+x[1:2])
 ```
-funkcja wybirtajaca 3 elementy z wektora od 1 do 10 bez powtorzen
+funkcja wybierajaca 3 elementy z wektora od 1 do 10 bez powtorzen
 ```{r}
 sample(1:10,3,replace = F)
 
