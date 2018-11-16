@@ -1,0 +1,83 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+X0<-c(X =9115.8000 , Y =  10063.6000, Z = 133.0000)
+  xyz<-as.matrix(zbco2100[,-1])
+xyz7<-xyz[sample(1:nrow(xyz),9,replace = F),]
+xyz0<-t(apply(xyz7,1,FUN =  function(a){ a-X0}))
+print(xyz0)
+```
+x^2,y^2,z^2
+```{r}
+xyz7^2
+
+```
+
+przyblizone wspólczyniki równania powierzchni
+```{r}
+G_fun<-function(wsp){#obliczna wsplóczyniki równania powierzchni
+  wsp_sqr<-wsp^2
+colnames(wsp_sqr)<-c("A11","A22","A33")
+wsp_2<-2*wsp
+colnames(wsp_2)<-c("A41","A42","A43")
+
+X<-cbind(wsp_sqr, #A11 A22 A33
+      A12=apply(wsp,1,function(abc){2*abc[1]*abc[2]}),
+      A23=apply(wsp,1,function(abc){2*abc[2]*abc[3]}),
+      A31=apply(wsp,1,function(abc){2*abc[1]*abc[3]}),
+      wsp_2 #A41 A42 A43
+)
+return(X)
+}
+X<-G_fun(xyz0_2)
+B<-matrix(data = -1,nrow = 9,ncol = 1)
+(A_0<-solve(X,B))
+```
+G_0
+```{r}
+xyz_all_0<-t(apply(xyz,1,FUN =  function(a){ a-X0}))
+X_all<-G_fun(xyz_all_0)
+(G_0<-apply(X_all,1,function(x) {x*A_0}))
+```
+Lewa strona równania Vi
+```{r}
+G_0<-rbind(G_0,1)
+(G_0<-colSums(G_0))
+(G_0<-(-G_0))
+```
+Wspólczyniki równania powierzchni
+```{r}
+ A<-t(X_all)%*%X_all
+  B<-t(X_all)%*%G_0
+(Vi<-solve(A,B))
+```
+```{r}
+row.names(Vi)
+which(row.names(vi)=="A11")
+```
+
+Srodek kuli
+```{r}
+(Ax<-matrix(c(Vi[c(1,4,6,
+                  4,2,5,
+                  6,5,3)]),nrow = 3,ncol = 3,byrow = T))
+(Bx<--matrix(c(Vi[c(7,8,9)]),ncol = 1,byrow = F))
+(Xs<-solve(Ax,Bx))
+```
+```{r}
+(R_kula<-apply(xyz_all_0,1,function(bcd){sqrt(sum(bcd^2-Xs^2))}))
+mean(R_kula)
+```
+```{r}
+Xs+X0
+```
+126.2+9.000
+```{r}
+(max(R_kula)-min(R_kula))/(max(R_kula)+min(R_kula))*100
+126.2+9
+126.2+15.7
+
+```
+
