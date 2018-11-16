@@ -68,4 +68,22 @@ print(x)
 cut(x,2,labels = c("a","b"))
 
 ```
- 
+
+rozdziela pomiary na góre i dól 
+```{r}
+s1$poziom<-cut(s1$H,2,labels = c("d","g"))
+```
+ramka danych ze srodkami slupóW w czasie (arkusz exel)
+```{r}
+
+```
+
+funkcja liczaca odchylenie od pionu 
+```{r}
+
+```
+funkcja liczaca zmiany pochylenia nóg zbiornika 
+```{r}
+
+```
+
