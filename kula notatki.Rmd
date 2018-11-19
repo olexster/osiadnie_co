@@ -67,15 +67,16 @@ Srodek kuli
 (Xs<-solve(Ax,Bx))
 ```
 ```{r}
-(R_kula<-apply(xyz_all_0,1,function(bcd){sqrt(sum(bcd^2-Xs^2))}))
-mean(R_kula)
+(R_kula<-apply(xyz_all_0,1,function(bcd){c(sqrt(sum(bcd^2-Xs^2)),bcd-Xs)}))
+mean(R_kula[1,])
+sd(R_kula)
 ```
 ```{r}
 Xs+X0
 ```
 126.2+9.000
 ```{r}
-(max(R_kula)-min(R_kula))/(max(R_kula)+min(R_kula))*100
+2*(max(R_kula)-min(R_kula))/(max(R_kula)+min(R_kula))*100
 126.2+9
 126.2+15.7
 
